@@ -14,5 +14,4 @@ After you have put the 2 packages from this workspace into yours (or just cloned
 Checkout the `move_group.launch` file for major namespace changes
 
 #### TODO/ Coming soon
-TODO: Example with C++ script  
 TODO: Blog post coming soon
