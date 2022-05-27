@@ -42,8 +42,7 @@
   </include>
 
   <!-- Trajectory Execution Functionality for secondary -->
-  <!-- Donot include trajectory execution functionality for secondary_namespace use the primary interface to execute secondary plans -->
-
+  <!-- Donot include trajectory execution functionality for secondary_namespace use the primary interface to execute secondary plans (See python or C++ examples included) -->
 
   <!-- Trajectory Execution Functionality -->
   <include ns="move_group" file="$(find ur10e_moveit_config)/launch/trajectory_execution.launch.xml" if="$(arg allow_trajectory_execution)">
@@ -52,7 +51,7 @@
     <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)"/>
   </include>
 
-  <!-- Start the actual move_group node/action server -->
+  <!-- Start the actual move_group node/action servers -->
   <node name="move_group" launch-prefix="$(arg launch_prefix)" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen" args="$(arg command_args)">
     <!-- Set the display variable, in case OpenGL code is used internally -->
     <env name="DISPLAY" value="$(optenv DISPLAY :0)" />
@@ -69,9 +68,6 @@
     <param name="planning_scene_monitor/publish_transforms_updates" value="$(arg publish_monitored_planning_scene)" />
   </node>
 
-  <!-- <remap from="/$(arg secondary_namespace)/move_group/monitored_planning_scene" to="/move_group/monitored_planning_scene"/>
-  <remap from="/$(arg secondary_namespace)/planning_scene" to="/planning_scene"/> -->
-  <!-- <remap from="/$(arg secondary_namespace)/planning_scene_world" to="/planning_scene_world"/> -->
 
   <group ns="$(arg secondary_namespace)">
   <node name="move_group" launch-prefix="$(arg launch_prefix)" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen" args="$(arg command_args)">
@@ -85,7 +81,11 @@
     <param name="planning_scene_monitor/publish_state_updates" value="True" />
     <param name="planning_scene_monitor/publish_transforms_updates" value="True" />
 
+    <!-- Remapping environment monitoring and joint states to the primary instance -->
     <remap from="/$(arg secondary_namespace)/joint_states" to="/joint_states"/>
+    <remap from="/$(arg secondary_namespace)/move_group/monitored_planning_scene" to="/move_group/monitored_planning_scene"/>
+    <remap from="/$(arg secondary_namespace)/planning_scene" to="/planning_scene"/>
+    <remap from="/$(arg secondary_namespace)/planning_scene_world" to="/planning_scene_world"/>
 
   </node>
   </group>

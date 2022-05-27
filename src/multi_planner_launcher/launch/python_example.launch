@@ -1,0 +1,5 @@
+<launch>
+
+    <node pkg="multi_planner_launcher" type="movegroup_interface.py" name="movegroup_interface" output="screen"/>
+
+</launch>
