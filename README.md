@@ -1,5 +1,5 @@
 # multiple_planners_moveit
-Load Mulitple planners on different namespaces on MoveIt
+Load Mulitple planners on different namespaces - MoveIt
 
 
 TODO: Example with C++ and a python script with usage will be added here soon
