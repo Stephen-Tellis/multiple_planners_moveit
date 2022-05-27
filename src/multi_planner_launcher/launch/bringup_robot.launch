@@ -1,0 +1,7 @@
+<launch>
+
+    <!-- BRINGUP ROBOT -->
+    <!-- We use the UR10e -->
+    <include file="$(find ur_gazebo)/launch/ur10e_bringup.launch"/>
+
+</launch>

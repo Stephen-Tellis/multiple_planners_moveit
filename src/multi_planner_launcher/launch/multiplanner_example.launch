@@ -1,0 +1,21 @@
+<launch>
+
+    <!-- Planner Settings here. --> 
+    <arg name="pipeline" default="pilz_industrial_motion_planner" />
+    <arg name="secondary_pipeline" default="ompl" />
+    <arg name="secondary_namespace" default="secondary" />
+
+    <!-- MOVE GROUP -->
+    <include file="$(find ur10e_moveit_config)/launch/ur10e_moveit_planning_execution.launch" >
+        <arg name="sim" value="true"/>
+        <arg name="pipeline" default="$(arg pipeline)"/>
+        <arg name="secondary_namespace" default="$(arg secondary_namespace)"/>
+        <arg name="secondary_pipeline" default="$(arg secondary_pipeline)"/>
+    </include>
+
+    <!-- RVIZ -->
+    <include file="$(find ur10e_moveit_config)/launch/moveit_rviz.launch" >    
+        <arg name="rviz_config" value="$(find ur10e_moveit_config)/launch/moveit.rviz"/>
+    </include>
+
+</launch>

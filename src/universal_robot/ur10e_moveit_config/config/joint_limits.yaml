@@ -1,0 +1,74 @@
+# joint_limits.yaml allows the dynamics properties specified in the URDF to be overwritten or augmented as needed
+# Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration]
+# Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
+joint_limits:
+  elbow_joint:
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+    has_effort_limits: true
+    has_position_limits: true
+    has_velocity_limits: true
+    max_effort: 150.0
+    # we artificially limit this joint to half its actual joint position limit
+    # to avoid (MoveIt/OMPL) planning problems, as due to the physical
+    # construction of the robot, it's impossible to rotate the 'elbow_joint'
+    # over more than approx +- 1 pi (the shoulder lift joint gets in the way).
+    #
+    # This leads to planning problems as the search space will be divided into
+    # two sections, with no connections from one to the other.
+    #
+    # Refer to https://github.com/ros-industrial/universal_robot/issues/265 for
+    # more information.
+    max_position: 2.62
+    max_velocity: 3.33 #!degrees  180.0
+    min_position: -2.62
+  shoulder_lift_joint:
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+    has_effort_limits: true
+    has_position_limits: true
+    has_velocity_limits: true
+    max_effort: 330.0
+    max_position: 0.25
+    max_velocity: 2.28 #!degrees  180.0
+    min_position: -3.14159
+  shoulder_pan_joint:
+    has_acceleration_limits: true
+    max_acceleration: 3.14    
+    has_effort_limits: true
+    has_position_limits: true
+    has_velocity_limits: true
+    max_effort: 330.0
+    max_position: 1.57 # -1.396 # 1.57
+    max_velocity: 2.28 #2.09
+    min_position: -1.57 # -4.712 #-1.57
+  wrist_1_joint:
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+    has_effort_limits: true
+    has_position_limits: true
+    has_velocity_limits: true
+    max_effort: 56.0
+    max_position: 1.05
+    max_velocity: 3.33 #!degrees  180.0
+    min_position: -5.2
+  wrist_2_joint:
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+    has_effort_limits: true
+    has_position_limits: true
+    has_velocity_limits: true
+    max_effort: 56.0
+    max_position: 3.14
+    max_velocity: 3.33 #!degrees  180.0
+    min_position: -3.14
+  wrist_3_joint:
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+    has_effort_limits: true
+    has_position_limits: true
+    has_velocity_limits: true
+    max_effort: 56.0
+    max_position: 3.5
+    max_velocity: 3.33 #!degrees  180.0
+    min_position: -3.5
